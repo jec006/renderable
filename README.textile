@@ -1,0 +1,45 @@
+h1. Renderable
+
+Provides a simple way to render a js object of a particular format into a DOMElement
+
+<code>
+{
+  "type" : "div",
+  "attributes" : {
+    "className" : "class1 class2",
+    "id" : "specialId",
+    "style" : "display:block;"
+  },
+  "content" : "text" | { <renderable object> } | [ { <renderable object1> }, { <renderable object2> } ]
+}
+</code>
+
+Can also accept an array of renderable objects.
+
+Finally, provides a class called Renderable object which can be instantiated like:
+
+<code>
+//Create a new Renderable with parameters
+var render = new Renderable('div', {'className':'holder'}, 'This is a div');
+
+//append it to an element and return the inserted element
+var insertedElement = render.appendTo(DOMElement);
+
+//create a renderable from a renderable object
+var renderableObject = {
+ "type" : "div",
+ "attributes" : {
+   "className" : "class1 class2",
+   "id" : "specialId",
+   "style" : "display:block;"
+ },
+ "content" : "text" | { <renderable object> } | [ { <renderable object1> }, { <renderable object2> } ]
+};
+
+var newRender = Renderable.create(renderableObject);
+</code>
+
+
+It will also have special ways to create some elements, such as tables, checkbox/radio button lists, lists, ect.
+
+ Requires the "mCreate library":https://github.com/jec006/mcreate
