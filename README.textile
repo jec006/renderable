@@ -2,6 +2,7 @@ h1. Renderable
 
 Provides a simple way to render a js object of a particular format into a DOMElement
 
+<pre>
 <code>
 {
   "type" : "div",
@@ -13,11 +14,13 @@ Provides a simple way to render a js object of a particular format into a DOMEle
   "content" : "text" | { <renderable object> } | [ { <renderable object1> }, { <renderable object2> } ]
 }
 </code>
+</pre>
 
 Can also accept an array of renderable objects.
 
 Finally, provides a class called Renderable object which can be instantiated like:
 
+<pre>
 <code>
 //Create a new Renderable with parameters
 var render = new Renderable('div', {'className':'holder'}, 'This is a div');
@@ -38,8 +41,9 @@ var renderableObject = {
 
 var newRender = Renderable.create(renderableObject);
 </code>
+</pre>
 
 
 It will also have special ways to create some elements, such as tables, checkbox/radio button lists, lists, ect.
 
- Requires the "mCreate library":https://github.com/jec006/mcreate
+Requires the "mCreate library":https://github.com/jec006/mcreate
