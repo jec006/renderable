@@ -5,7 +5,7 @@ Provides a simple way to render a js object of a particular format into a DOMEle
 <pre>
 <code>
 {
-  "type" : "div",
+  "tag" : "div",
   "attributes" : {
     "className" : "class1 class2",
     "id" : "specialId",
@@ -30,7 +30,7 @@ var insertedElement = render.appendTo(DOMElement);
 
 //create a renderable from a renderable object
 var renderableObject = {
- "type" : "div",
+ "tag" : "div",
  "attributes" : {
    "className" : "class1 class2",
    "id" : "specialId",
