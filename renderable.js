@@ -52,15 +52,14 @@
    */
   Renderable.prototype.render = function(){
     var el;
-
+  
     // handle arrays separately as we will need to loop through and append the elements after the fact
     var localContent = false;
     if(classname(this.content) == 'Array'){
       //make sure we copy it to local
-      localContent = this.content.splice(0, 0);
+      localContent = this.content.slice(0);
       this.content = '';
     }
-
 
     switch (this.tag) {
       case 'table' :
@@ -73,14 +72,14 @@
         //TODO: Implement this
         break;
       default:
-        el = mCreate.createElement(this.tag, this.attrs, this.content);
+        el = mCreate.createElement(this.tag, this.content||'', this.attrs||{});
         break;
     }
 
     // add in the items from content if content was an array
     if(localContent){
-
-      for(var renderable in localContent){
+      for(var index in localContent){
+        var renderable = localContent[index];
         if(classname(renderable) == 'Renderable'){
           el.appendChild(renderable.render());
         } else {
@@ -103,7 +102,21 @@
     //return the rendered DOMElement
     return el;
   };
-
+  
+  /**
+   *  Attach a renderable to a dom element and return the attached element
+   */
+  Renderable.prototype.attach = function(el){
+    if(typeof(el.appendChild) == 'function'){
+      var child = this.render();
+      el.appendChild(child);
+      return child;
+    } else {
+      this.log('Failed to attach child - invalid parameter el.', el);
+      return null;
+    }
+  }
+  
   /**
    * Method for logging messages to console
    * arguments is passed unaltered to the console.log function should it exist
@@ -111,8 +124,8 @@
    * You can turn off logging by setting Renderable.prototype.hideDebugging = true
    */
   Renderable.prototype.log = function(){
-    if(!this.hideDebugging && typeof(window.console) != 'undefined' && typeof(window.console) == 'function'){
-      console.log.apply(arguments);
+    if(!this.hideDebugging && typeof(window.console) != 'undefined' && typeof(window.console.log) == 'function'){
+      console.log.apply(console, arguments);
     }
   }
 
